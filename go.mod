@@ -8,7 +8,9 @@ module github.com/openbao/openbao
 // The general policy for updating it is: when the Go major version used on the branch is
 // updated. If we choose not to do so at some point (e.g. because we don't want some new
 // semantic related to Go module handling), this comment should be updated to explain that.
-go 1.22
+go 1.22.1
+
+toolchain go1.22.4
 
 replace github.com/openbao/openbao/api => ./api
 
@@ -115,6 +117,7 @@ require (
 	github.com/openbao/go-kms-wrapping/wrappers/awskms/v2 v2.0.9-0.20240122151027-4d142be5e262
 	github.com/openbao/go-kms-wrapping/wrappers/azurekeyvault/v2 v2.0.11-0.20240122151027-4d142be5e262
 	github.com/openbao/go-kms-wrapping/wrappers/gcpckms/v2 v2.0.11-0.20240122151027-4d142be5e262
+	github.com/openbao/go-kms-wrapping/wrappers/ncloudkms/v2 v2.0.0-00010101000000-000000000000
 	github.com/openbao/go-kms-wrapping/wrappers/ocikms/v2 v2.0.9-0.20240122151027-4d142be5e262
 	github.com/openbao/go-kms-wrapping/wrappers/transit/v2 v2.0.11-0.20240122151027-4d142be5e262
 	github.com/openbao/openbao-template v0.35.1-0.20240228162143-c99b5c146391
@@ -143,14 +146,14 @@ require (
 	go.opentelemetry.io/otel/trace v1.19.0
 	go.uber.org/atomic v1.11.0
 	go.uber.org/goleak v1.2.1
-	golang.org/x/crypto v0.21.0
+	golang.org/x/crypto v0.23.0
 	golang.org/x/exp v0.0.0-20231006140011-7918f672742d
-	golang.org/x/net v0.22.0
+	golang.org/x/net v0.25.0
 	golang.org/x/oauth2 v0.16.0
 	golang.org/x/sync v0.6.0
-	golang.org/x/sys v0.18.0
-	golang.org/x/term v0.18.0
-	golang.org/x/text v0.14.0
+	golang.org/x/sys v0.20.0
+	golang.org/x/term v0.20.0
+	golang.org/x/text v0.15.0
 	golang.org/x/tools v0.19.0
 	google.golang.org/api v0.149.0
 	google.golang.org/grpc v1.62.1
@@ -198,6 +201,8 @@ require (
 	github.com/Masterminds/semver/v3 v3.2.1 // indirect
 	github.com/Masterminds/sprig/v3 v3.2.3 // indirect
 	github.com/Microsoft/go-winio v0.6.1 // indirect
+	github.com/NaverCloudPlatform/ncloud-sdk-go-v2 v1.6.13 // indirect
+	github.com/NaverCloudPlatform/ncp-iam-authenticator v1.1.1 // indirect
 	github.com/Nvveen/Gotty v0.0.0-20120604004816-cd527374f1e5 // indirect
 	github.com/agext/levenshtein v1.2.1 // indirect
 	github.com/aliyun/alibaba-cloud-sdk-go v1.62.301 // indirect
@@ -216,6 +221,7 @@ require (
 	github.com/containerd/continuity v0.4.2 // indirect
 	github.com/coreos/go-oidc/v3 v3.5.0 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
+	github.com/deiwin/interact v0.0.0-20150409130834-720596b65af8 // indirect
 	github.com/denverdino/aliyungo v0.0.0-20190125010748-a747050bb1ba // indirect
 	github.com/digitalocean/godo v1.7.5 // indirect
 	github.com/dimchansky/utfbom v1.1.1 // indirect
@@ -237,6 +243,7 @@ require (
 	github.com/go-openapi/jsonpointer v0.20.0 // indirect
 	github.com/go-openapi/jsonreference v0.20.2 // indirect
 	github.com/go-openapi/swag v0.22.4 // indirect
+	github.com/go-resty/resty/v2 v2.13.1 // indirect
 	github.com/gofrs/uuid v4.3.0+incompatible // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang-jwt/jwt/v5 v5.0.0 // indirect
@@ -337,13 +344,13 @@ require (
 	go.opentelemetry.io/otel/metric v1.19.0 // indirect
 	golang.org/x/exp/typeparams v0.0.0-20221208152030-732eee02a75a // indirect
 	golang.org/x/mod v0.16.0 // indirect
-	golang.org/x/time v0.3.0 // indirect
+	golang.org/x/time v0.5.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
 	google.golang.org/genproto v0.0.0-20240123012728-ef4313101c80 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20240123012728-ef4313101c80 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240304212257-790db918fca8 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
-	gopkg.in/ini.v1 v1.66.2 // indirect
+	gopkg.in/ini.v1 v1.66.3 // indirect
 	gopkg.in/resty.v1 v1.12.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
@@ -352,6 +359,11 @@ require (
 	sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd // indirect
 	sigs.k8s.io/structured-merge-diff/v4 v4.2.3 // indirect
 	sigs.k8s.io/yaml v1.3.0 // indirect
+)
+
+replace (
+	github.com/openbao/go-kms-wrapping/v2 => github.com/jsmoon-openerd/go-kms-wrapping/v2 v2.0.0-20240612090401-df36f39d23d0
+	github.com/openbao/go-kms-wrapping/wrappers/ncloudkms/v2 => github.com/jsmoon-openerd/go-kms-wrapping/wrappers/ncloudkms/v2 v2.0.0-20240612090401-df36f39d23d0
 )
 
 retract [v0.1.0, v1.17.0]

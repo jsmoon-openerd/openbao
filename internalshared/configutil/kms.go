@@ -22,6 +22,7 @@ import (
 	"github.com/openbao/go-kms-wrapping/wrappers/awskms/v2"
 	"github.com/openbao/go-kms-wrapping/wrappers/azurekeyvault/v2"
 	"github.com/openbao/go-kms-wrapping/wrappers/gcpckms/v2"
+	"github.com/openbao/go-kms-wrapping/wrappers/kmip/v2"
 	"github.com/openbao/go-kms-wrapping/wrappers/ncloudkms/v2"
 	"github.com/openbao/go-kms-wrapping/wrappers/ocikms/v2"
 	"github.com/openbao/go-kms-wrapping/wrappers/transit/v2"
@@ -188,6 +189,9 @@ func configureWrapper(configKMS *KMS, infoKeys *[]string, info *map[string]strin
 	case wrapping.WrapperTypeGcpCkms:
 		wrapper, kmsInfo, err = GetGCPCKMSKMSFunc(configKMS, opts...)
 
+	case wrapping.WrapperTypeKmip:
+		wrapper, kmsInfo, err = GetKMIPFunc(configKMS, opts...)
+
 	case wrapping.WrapperTypeNcloudKms:
 		wrapper, kmsInfo, err = GetNCLOUDKMSKMSFunc(configKMS, opts...)
 
@@ -310,6 +314,28 @@ func GetGCPCKMSKMSFunc(kms *KMS, opts ...wrapping.Option) (wrapping.Wrapper, map
 		info["GCP KMS Region"] = wrapperInfo.Metadata["region"]
 		info["GCP KMS Key Ring"] = wrapperInfo.Metadata["key_ring"]
 		info["GCP KMS Crypto Key"] = wrapperInfo.Metadata["crypto_key"]
+	}
+	return wrapper, info, nil
+}
+
+func GetKMIPFunc(kms *KMS, opts ...wrapping.Option) (wrapping.Wrapper, map[string]string, error) {
+	wrapper := kmip.NewWrapper()
+	wrapperInfo, err := wrapper.SetConfig(context.Background(), append(opts, wrapping.WithConfigMap(kms.Config))...)
+	if err != nil {
+		// If the error is any other than logical.KeyNotFoundError, return the error
+		if !errwrap.ContainsType(err, new(logical.KeyNotFoundError)) {
+			return nil, nil, err
+		}
+	}
+	info := make(map[string]string)
+	if wrapperInfo != nil {
+		info["KMIP KeyID"] = wrapperInfo.Metadata["kms_key_id"]
+		info["KMIP Endpoint"] = wrapperInfo.Metadata["endpoint"]
+		info["KMIP Read Timeout"] = wrapperInfo.Metadata["read_timeout"]
+		info["KMIP Write Timeout"] = wrapperInfo.Metadata["write_timeout"]
+		if serverName, ok := wrapperInfo.Metadata["server_name"]; ok {
+			info["KMIP Server Name"] = serverName
+		}
 	}
 	return wrapper, info, nil
 }

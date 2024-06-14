@@ -117,6 +117,7 @@ require (
 	github.com/openbao/go-kms-wrapping/wrappers/awskms/v2 v2.0.9-0.20240122151027-4d142be5e262
 	github.com/openbao/go-kms-wrapping/wrappers/azurekeyvault/v2 v2.0.11-0.20240122151027-4d142be5e262
 	github.com/openbao/go-kms-wrapping/wrappers/gcpckms/v2 v2.0.11-0.20240122151027-4d142be5e262
+	github.com/openbao/go-kms-wrapping/wrappers/kmip/v2 v2.0.0-00010101000000-000000000000
 	github.com/openbao/go-kms-wrapping/wrappers/ncloudkms/v2 v2.0.0-00010101000000-000000000000
 	github.com/openbao/go-kms-wrapping/wrappers/ocikms/v2 v2.0.9-0.20240122151027-4d142be5e262
 	github.com/openbao/go-kms-wrapping/wrappers/transit/v2 v2.0.11-0.20240122151027-4d142be5e262
@@ -208,6 +209,8 @@ require (
 	github.com/agext/levenshtein v1.2.1 // indirect
 	github.com/aliyun/alibaba-cloud-sdk-go v1.62.301 // indirect
 	github.com/andybalholm/brotli v1.0.4 // indirect
+	github.com/ansel1/merry v1.6.2 // indirect
+	github.com/ansel1/merry/v2 v2.0.1 // indirect
 	github.com/apparentlymart/go-textseg/v13 v13.0.0 // indirect
 	github.com/aws/aws-sdk-go v1.44.269 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
@@ -237,6 +240,8 @@ require (
 	github.com/evanphx/json-patch/v5 v5.6.0 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/gammazero/deque v0.2.1 // indirect
+	github.com/gemalto/flume v0.13.0 // indirect
+	github.com/gemalto/kmip-go v0.0.10 // indirect
 	github.com/go-asn1-ber/asn1-ber v1.5.4 // indirect
 	github.com/go-logr/logr v1.2.4 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
@@ -293,6 +298,7 @@ require (
 	github.com/lufia/plan9stats v0.0.0-20211012122336-39d0f177ccd0 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.4 // indirect
+	github.com/mgutz/ansi v0.0.0-20200706080929-d51e80ef957d // indirect
 	github.com/miekg/dns v1.1.43 // indirect
 	github.com/moby/patternmatcher v0.5.0 // indirect
 	github.com/moby/spdystream v0.2.0 // indirect
@@ -343,6 +349,8 @@ require (
 	github.com/zclconf/go-cty v1.12.1 // indirect
 	go.opencensus.io v0.24.0 // indirect
 	go.opentelemetry.io/otel/metric v1.19.0 // indirect
+	go.uber.org/multierr v1.8.0 // indirect
+	go.uber.org/zap v1.21.0 // indirect
 	golang.org/x/exp/typeparams v0.0.0-20221208152030-732eee02a75a // indirect
 	golang.org/x/mod v0.16.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
@@ -363,8 +371,9 @@ require (
 )
 
 replace (
-	github.com/openbao/go-kms-wrapping/v2 => github.com/jsmoon-openerd/go-kms-wrapping/v2 v2.0.0-20240612090401-df36f39d23d0
-	github.com/openbao/go-kms-wrapping/wrappers/ncloudkms/v2 => github.com/jsmoon-openerd/go-kms-wrapping/wrappers/ncloudkms/v2 v2.0.0-20240612090401-df36f39d23d0
+	github.com/openbao/go-kms-wrapping/v2 => github.com/jsmoon-openerd/go-kms-wrapping/v2 v2.0.0-20240614234335-9d549d559344
+	github.com/openbao/go-kms-wrapping/wrappers/kmip/v2 => github.com/jsmoon-openerd/go-kms-wrapping/wrappers/kmip/v2 v2.0.0-20240614234335-9d549d559344
+	github.com/openbao/go-kms-wrapping/wrappers/ncloudkms/v2 => github.com/jsmoon-openerd/go-kms-wrapping/wrappers/ncloudkms/v2 v2.0.0-20240614234335-9d549d559344
 )
 
 retract [v0.1.0, v1.17.0]
